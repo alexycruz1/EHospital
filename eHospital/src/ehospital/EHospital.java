@@ -5,6 +5,9 @@
  */
 package ehospital;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alexy jr
@@ -16,8 +19,36 @@ public class EHospital extends javax.swing.JFrame {
      */
     public EHospital() {
         initComponents();
-        
+
         setLocationRelativeTo(this);
+    }
+
+    public void ActualizarComplejos() {
+        jcb_ambulancias_complejo.removeAllItems();
+        jcb_paramedicos_complejos.removeAllItems();
+        jcb_ch_eliminar.removeAllItems();
+
+        for (int i = 0; i < Complejos.size(); i++) {
+            jcb_ambulancias_complejo.addItem(Complejos.get(i));
+            jcb_paramedicos_complejos.addItem(Complejos.get(i));
+            jcb_ch_eliminar.addItem(Complejos.get(i));
+        }
+    }
+
+    public void ActualizarParamedicos() {
+        jcb_paramedicos_eliminar_transferir.removeAllItems();
+
+        for (int i = 0; i < Paramedicos.size(); i++) {
+            jcb_paramedicos_eliminar_transferir.addItem(Paramedicos.get(i));
+        }
+    }
+
+    public void ActualizarAmbulancias() {
+        jcb_ambulancias_eliminar_transferir.removeAllItems();
+
+        for (int i = 0; i < Ambulancias.size(); i++) {
+            jcb_ambulancias_eliminar_transferir.addItem(Ambulancias.get(i));
+        }
     }
 
     /**
@@ -36,7 +67,7 @@ public class EHospital extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         js_ch_cap_paramedicos = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
-        js_cap_ambulancias = new javax.swing.JSpinner();
+        js_ch_cap_ambulancias = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         jcb_ch_ranking_emergencias = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
@@ -75,6 +106,7 @@ public class EHospital extends javax.swing.JFrame {
         jcb_ambulancias_eliminar_transferir = new javax.swing.JComboBox();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("eHospital ©");
@@ -83,7 +115,11 @@ public class EHospital extends javax.swing.JFrame {
 
         jLabel2.setText("Capacidad de paramedicos");
 
+        js_ch_cap_paramedicos.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
         jLabel3.setText("Capacidad de ambulancias");
+
+        js_ch_cap_ambulancias.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
         jLabel4.setText("Ranking de emergencias a tratar");
 
@@ -96,6 +132,11 @@ public class EHospital extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jta_ch_direccion_complejo);
 
         jButton1.setText("Construir complejo");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,8 +164,8 @@ public class EHospital extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtf_ch_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(js_cap_ambulancias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                                        .addComponent(js_ch_cap_paramedicos, javax.swing.GroupLayout.Alignment.LEADING))))))
+                                        .addComponent(js_ch_cap_ambulancias, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(js_ch_cap_paramedicos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(209, 209, 209)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -144,7 +185,7 @@ public class EHospital extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(js_cap_ambulancias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(js_ch_cap_ambulancias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -173,6 +214,11 @@ public class EHospital extends javax.swing.JFrame {
         jLabel10.setText("Complejo asignado");
 
         jButton2.setText("Registrar paramedico");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -241,6 +287,11 @@ public class EHospital extends javax.swing.JFrame {
         jLabel15.setText("Complejo asignado");
 
         jButton3.setText("Registrar ambulancia");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -302,14 +353,39 @@ public class EHospital extends javax.swing.JFrame {
         jTabbedPane1.addTab("Ambulancias", jPanel3);
 
         jButton4.setText("Despedir paramedico");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         jButton5.setText("Eliminar complejo hospitalario");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         jButton6.setText("Transferir");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         jButton7.setText("Eliminar ambulancia");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
 
         jButton8.setText("Transferir");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -358,6 +434,19 @@ public class EHospital extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Transferencias/Despidos", jPanel4);
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 590, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 468, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Mapa", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -371,6 +460,331 @@ public class EHospital extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+        if ("".equals(jtf_ch_nombre.getText()) || "".equals(jta_ch_direccion_complejo.getText())) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Nombre, Direccion, Ranking;
+            int Capacidad_paramedicos, Capacidad_ambulancias;
+
+            Nombre = jtf_ch_nombre.getText();
+            Direccion = jta_ch_direccion_complejo.getText();
+            Ranking = jcb_ch_ranking_emergencias.getSelectedItem().toString();
+            Capacidad_paramedicos = (int) js_ch_cap_paramedicos.getValue();
+            Capacidad_ambulancias = (int) js_ch_cap_ambulancias.getValue();
+
+            ComplejoHospitalario Nuevo_complejo = new ComplejoHospitalario(Nombre, Direccion, Capacidad_paramedicos, Capacidad_ambulancias, Ranking);
+
+            jcb_ambulancias_complejo.addItem(Nuevo_complejo);
+            jcb_ch_eliminar.addItem(Nuevo_complejo);
+            jcb_paramedicos_complejos.addItem(Nuevo_complejo);
+            Complejos.add(Nuevo_complejo);
+
+            jtf_ch_nombre.setText("");
+            jta_ch_direccion_complejo.setText("");
+            js_ch_cap_paramedicos.setValue(0);
+            js_ch_cap_ambulancias.setValue(0);
+
+            JOptionPane.showMessageDialog(this, "Has construido un complejo hospitalario",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Porfavor llena todos los campos",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+        if ("".equals(jtf_paramedicos_nombre.getText()) || "".equals(jtf_paramedicos_edad.getText())
+                || "".equals(jtf_paramedicos_ID.getText()) || jcb_paramedicos_complejos.getItemCount() == 0) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Nombre, Ranking, Complejo_asignado;
+            int Edad, ID;
+
+            Nombre = jtf_paramedicos_nombre.getText();
+            Ranking = jcb_paramedicos_ranking.getSelectedItem().toString();
+            Complejo_asignado = ((ComplejoHospitalario) jcb_paramedicos_complejos.getSelectedItem()).getNombre();
+            Edad = Integer.parseInt(jtf_paramedicos_edad.getText());
+            ID = Integer.parseInt(jtf_paramedicos_ID.getText());
+
+            Paramedico Nuevo_paramedico = new Paramedico(Nombre, Edad, ID, Ranking, Complejo_asignado);
+
+            jcb_paramedicos_eliminar_transferir.addItem(Nuevo_paramedico);
+            Paramedicos.add(Nuevo_paramedico);
+            for (int i = 0; i < Complejos.size(); i++) {
+                if (Complejos.get(i).getNombre().equals(Complejo_asignado)) {
+                    Complejos.get(i).getParamedicos().add(Nuevo_paramedico);
+                }
+            }
+            ActualizarComplejos();
+
+            jtf_paramedicos_nombre.setText("");
+            jtf_paramedicos_edad.setText("");
+            jtf_paramedicos_ID.setText("");
+
+            JOptionPane.showMessageDialog(this, "Has contratado a un paramedico",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Detectamos campos vacios",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+        if ("".equals(jtf_ambulancias_numero_placa.getText()) || "".equals(jtf_ambulancias_año.getText())
+                || "".equals(jtf_ambulancias_velocidad.getText()) || jcb_ambulancias_complejo.getItemCount() == 0) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Numero_placa, Complejo_asignado;
+            int Año_vehiculo, Velocidad_max;
+
+            Numero_placa = jtf_ambulancias_numero_placa.getText();
+            Complejo_asignado = ((ComplejoHospitalario) jcb_ambulancias_complejo.getSelectedItem()).getNombre();
+            Año_vehiculo = Integer.parseInt(jtf_ambulancias_año.getText());
+            Velocidad_max = Integer.parseInt(jtf_ambulancias_velocidad.getText());
+
+            Ambulancia Nueva_ambulancia = new Ambulancia(Numero_placa, Año_vehiculo, Velocidad_max, Complejo_asignado);
+
+            jcb_ambulancias_eliminar_transferir.addItem(Nueva_ambulancia);
+            Ambulancias.add(Nueva_ambulancia);
+            for (int i = 0; i < Complejos.size(); i++) {
+                if (Complejos.get(i).getNombre().equals(Complejo_asignado)) {
+                    Complejos.get(i).getAmbulancias().add(Nueva_ambulancia);
+                }
+            }
+            ActualizarComplejos();
+
+            jtf_ambulancias_numero_placa.setText("");
+            jtf_ambulancias_año.setText("");
+            jtf_ambulancias_velocidad.setText("");
+
+            JOptionPane.showMessageDialog(this, "Has registrado una ambulancia",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Detectamos campos vacios",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+        if (jcb_ch_eliminar.getItemCount() == 0) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Nombre_complejo;
+            Nombre_complejo = ((ComplejoHospitalario) jcb_ch_eliminar.getSelectedItem()).getNombre();
+
+            for (int i = 0; i < Complejos.size(); i++) {
+                if (Complejos.get(i).getNombre().equals(Nombre_complejo)) {
+                    Complejos.remove(i);
+                }
+            }
+
+            for (int i = 0; i < Paramedicos.size(); i++) {
+                if (Paramedicos.get(i).getComplejo_asignado().equals(Nombre_complejo)) {
+                    Paramedicos.get(i).setComplejo_asignado("");
+                }
+            }
+
+            for (int i = 0; i < Ambulancias.size(); i++) {
+                if (Ambulancias.get(i).getComplejo_asignado().equals(Nombre_complejo)) {
+                    Ambulancias.get(i).setComplejo_asignado("");
+                }
+            }
+
+            ActualizarComplejos();
+            ActualizarParamedicos();
+            ActualizarAmbulancias();
+
+            JOptionPane.showMessageDialog(this, "Ha eliminado un complejo hospitalario",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Detectamos campos vacios",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+
+        if (jcb_paramedicos_eliminar_transferir.getItemCount() == 0) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Nombre_paramedico;
+
+            Nombre_paramedico = ((Paramedico) jcb_paramedicos_eliminar_transferir.getSelectedItem()).getNombre();
+
+            for (int i = 0; i < Paramedicos.size(); i++) {
+                Paramedicos.remove(jcb_paramedicos_eliminar_transferir.getSelectedIndex());
+            }
+
+            for (int i = 0; i < Complejos.size(); i++) {
+                for (int j = 0; j < Complejos.get(i).getParamedicos().size(); j++) {
+                    if (Complejos.get(i).getParamedicos().get(j).getNombre().equals(Nombre_paramedico)) {
+                        Complejos.get(i).getParamedicos().remove(j);
+                    }
+                }
+            }
+
+            ActualizarComplejos();
+            ActualizarParamedicos();
+
+            JOptionPane.showMessageDialog(this, "Ha eliminado un paramedico",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Hemos detectado campos vacios",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+
+        if (jcb_paramedicos_eliminar_transferir.getItemCount() == 0 || jcb_ch_eliminar.getItemCount() == 0) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Nombre_complejo, Nombre_paramedico;
+
+            Nombre_complejo = ((ComplejoHospitalario) jcb_ch_eliminar.getSelectedItem()).getNombre();
+            Nombre_paramedico = ((Paramedico) jcb_paramedicos_eliminar_transferir.getSelectedItem()).getNombre();
+            Paramedico Paramedico_transferir = (Paramedico) jcb_paramedicos_eliminar_transferir.getSelectedItem();
+
+            for (int i = 0; i < Complejos.size(); i++) {
+                for (int j = 0; j < Complejos.get(i).getParamedicos().size(); j++) {
+                    if (Complejos.get(i).getParamedicos().get(j).getNombre().equals(Nombre_paramedico)) {
+                        Complejos.get(i).getParamedicos().remove(j);
+                    }
+                }
+            }
+
+            for (int i = 0; i < Complejos.size(); i++) {
+                if (Complejos.get(i).getNombre().equals(Nombre_complejo)) {
+                    for (int j = 0; j < Complejos.get(i).getParamedicos().size(); j++) {
+                        Complejos.get(i).getParamedicos().add(Paramedico_transferir);
+                    }
+                }
+            }
+
+            for (int i = 0; i < Paramedicos.size(); i++) {
+                if (Paramedicos.get(i).getNombre().equals(Nombre_paramedico)) {
+                    Paramedicos.get(i).setComplejo_asignado(Nombre_complejo);
+                }
+            }
+
+            ActualizarComplejos();
+            ActualizarParamedicos();
+
+            JOptionPane.showMessageDialog(this, "Ha trasnferido un paramedico",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Hemos detectado campos vacios",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+
+        if (jcb_ambulancias_eliminar_transferir.getItemCount() == 0) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Numero_ambulancia;
+
+            Numero_ambulancia = ((Ambulancia) jcb_ambulancias_eliminar_transferir.getSelectedItem()).getNumero_placa();
+
+            for (int i = 0; i < Ambulancias.size(); i++) {
+                if (Ambulancias.get(i).getNumero_placa().equals(Numero_ambulancia)) {
+                    Ambulancias.remove(i);
+                }
+            }
+
+            for (int i = 0; i < Complejos.size(); i++) {
+                for (int j = 0; j < Complejos.get(i).getAmbulancias().size(); j++) {
+                    if (Complejos.get(i).getAmbulancias().get(j).getNumero_placa().equals(Numero_ambulancia)) {
+                        Complejos.get(i).getAmbulancias().remove(j);
+                    }
+                }
+            }
+
+            JOptionPane.showMessageDialog(this, "Ha eliminado una ambulancia",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Hemos detectado campos vacios",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        boolean Campos_llenos = true;
+
+        if (jcb_ambulancias_eliminar_transferir.getItemCount() == 0 || jcb_ch_eliminar.getItemCount() == 0) {
+            Campos_llenos = false;
+        }
+
+        if (Campos_llenos) {
+            String Nombre_complejo, Numero_ambulancia;
+
+            Nombre_complejo = ((ComplejoHospitalario) jcb_ch_eliminar.getSelectedItem()).getNombre();
+            Numero_ambulancia = ((Ambulancia) jcb_ambulancias_eliminar_transferir.getSelectedItem()).getNumero_placa();
+            Ambulancia Ambulancia_transferir = (Ambulancia) jcb_ambulancias_eliminar_transferir.getSelectedItem();
+
+            for (int i = 0; i < Complejos.size(); i++) {
+                for (int j = 0; j < Complejos.get(i).getAmbulancias().size(); j++) {
+                    if (Complejos.get(i).getAmbulancias().get(j).getNumero_placa().equals(Numero_ambulancia)) {
+                        Complejos.get(i).getAmbulancias().remove(j);
+                    }
+                }
+            }
+
+            for (int i = 0; i < Complejos.size(); i++) {
+                if (Complejos.get(i).getNombre().equals(Nombre_complejo)) {
+                    Complejos.get(i).getAmbulancias().add(Ambulancia_transferir);
+                }
+            }
+
+            for (int i = 0; i < Ambulancias.size(); i++) {
+                if (Ambulancias.get(i).getNumero_placa().equals(Numero_ambulancia)) {
+                    Ambulancias.get(i).setComplejo_asignado(Nombre_complejo);
+                }
+            }
+
+            ActualizarAmbulancias();
+            ActualizarComplejos();
+
+            JOptionPane.showMessageDialog(this, "Ha trasnferido una ambulancia",
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Hemos detectado campos vacios",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -435,6 +849,7 @@ public class EHospital extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox jcb_ambulancias_complejo;
@@ -444,7 +859,7 @@ public class EHospital extends javax.swing.JFrame {
     private javax.swing.JComboBox jcb_paramedicos_complejos;
     private javax.swing.JComboBox jcb_paramedicos_eliminar_transferir;
     private javax.swing.JComboBox jcb_paramedicos_ranking;
-    private javax.swing.JSpinner js_cap_ambulancias;
+    private javax.swing.JSpinner js_ch_cap_ambulancias;
     private javax.swing.JSpinner js_ch_cap_paramedicos;
     private javax.swing.JTextArea jta_ch_direccion_complejo;
     private javax.swing.JTextField jtf_ambulancias_año;
@@ -455,4 +870,7 @@ public class EHospital extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_paramedicos_edad;
     private javax.swing.JTextField jtf_paramedicos_nombre;
     // End of variables declaration//GEN-END:variables
+ArrayList<ComplejoHospitalario> Complejos = new ArrayList();
+    ArrayList<Paramedico> Paramedicos = new ArrayList();
+    ArrayList<Ambulancia> Ambulancias = new ArrayList();
 }
