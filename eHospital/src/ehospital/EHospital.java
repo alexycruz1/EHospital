@@ -1101,7 +1101,11 @@ public class EHospital extends javax.swing.JFrame {
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
-        ArrayList temp = new ArrayList();
+        ArrayList Complejos_cumplen = new ArrayList();
+        ArrayList Caminos = new ArrayList();
+        ArrayList Valor_camino = new ArrayList();
+        double Minima_longitud = 9999999999.0;
+        
         String Ranking;
         Domicilio domicilio;
         
@@ -1113,40 +1117,48 @@ public class EHospital extends javax.swing.JFrame {
         for (int i = 0; i < Ubicaciones.size(); i++) {
             if (Complejos.size() > i) {
                 if (Ubicaciones.get(i).toString().equals(Complejos.get(i).getNombre())) {
-                    temp.add(Ubicaciones.get(i));
+                    Complejos_cumplen.add(Ubicaciones.get(i));
                 }
             }
         }
         
-        for (int i = 0; i < temp.size(); i++) {
-            if (((ComplejoHospitalario)temp.get(i)).getParamedicos().size() < 3) {
-                temp.remove(i);
+        for (int i = 0; i < Complejos_cumplen.size(); i++) {
+            if (((ComplejoHospitalario)Complejos_cumplen.get(i)).getParamedicos().size() < 3) {
+                Complejos_cumplen.remove(i);
             }
             
-            if ((((ComplejoHospitalario)temp.get(i)).getAmbulancias()).size() < 1) {
-                temp.remove(i);
+            if ((((ComplejoHospitalario)Complejos_cumplen.get(i)).getAmbulancias()).size() < 1) {
+                Complejos_cumplen.remove(i);
             }
             
-            if (!((ComplejoHospitalario)temp.get(i)).getRanking_emergencias().equals(Ranking)) {
-                temp.remove(i);
+            if (!((ComplejoHospitalario)Complejos_cumplen.get(i)).getRanking_emergencias().equals(Ranking)) {
+                Complejos_cumplen.remove(i);
             }
         }
         
-        for (int i = 0; i < temp.size(); i++) {
-            System.out.println(temp.toString());
+        for (int i = 0; i < Complejos_cumplen.size(); i++) {
+            System.out.println(Complejos_cumplen.toString());
         }
         
         dijkstra.init(graph);
         dijkstra.setSource(graph.getNode(domicilio.getNombre()));
         dijkstra.compute();
         
-        for (int i = 0; i < temp.size(); i++) {
+        for (int i = 0; i < Complejos_cumplen.size(); i++) {
+            Path camino = dijkstra.getPath(graph.getNode(((ComplejoHospitalario)Complejos_cumplen.get(i)).getNombre()));
+            Caminos.add(camino);
             
+            double Longitud_camino = camino.getPathWeight("ui.label");
+            Valor_camino.add(Longitud_camino);
         }
         
-        Path camino = dijkstra.getPath(graph.getNode(((ComplejoHospitalario)temp.get(0)).getNombre()));
-        System.out.println(dijkstra.getPath(graph.getNode(((ComplejoHospitalario)temp.get(0)).getNombre())));
-        System.out.println(camino.getPathWeight("ui.label"));
+        for (int i = 0; i < Valor_camino.size(); i++) {
+            if (((double)Valor_camino.get(i)) < Minima_longitud) {
+                Minima_longitud = ((double)(Valor_camino.get(i)));
+            }
+        }
+        
+        System.out.println(Minima_longitud + " esta es la minima longitud");
     }//GEN-LAST:event_jButton5MouseClicked
 
     /**
