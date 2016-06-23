@@ -1048,10 +1048,10 @@ public class EHospital extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Se ha agregado un Domicilio al mapa",
                     "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
-        }else if (Nombre_repetido) {
+        } else if (Nombre_repetido) {
             JOptionPane.showMessageDialog(this, "Ya existe este domicilio en el mapa",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Hemos detectado campos vacios",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
         }
