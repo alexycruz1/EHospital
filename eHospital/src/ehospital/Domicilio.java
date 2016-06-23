@@ -5,11 +5,13 @@
  */
 package ehospital;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alexy jr
  */
-public class Domicilio {
+public class Domicilio implements Serializable{
     String Nombre;
     String Direccion;
 

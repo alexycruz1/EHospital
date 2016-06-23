@@ -5,11 +5,13 @@
  */
 package ehospital;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alexy jr
  */
-public class Paramedico {
+public class Paramedico implements Comparable <Paramedico> , Serializable{
     String Nombre;
     int Edad;
     int ID;
@@ -65,6 +67,25 @@ public class Paramedico {
 
     public void setComplejo_asignado(String Complejo_asignado) {
         this.Complejo_asignado = Complejo_asignado;
+    }
+    
+    public boolean equals(Paramedico other){
+        return this.getRanking().equals(other.getRanking());
+    }
+    
+    @Override
+    public int compareTo(Paramedico other){
+        char este, otro;
+        este = this.getRanking().charAt(0);
+        otro = other.getRanking().charAt(0);
+        
+        if (this.equals(other)) {
+            return 0;
+        }else if (este > otro) {
+            return 1;
+        }else{
+            return -1;
+        }
     }
 
     @Override

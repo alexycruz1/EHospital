@@ -5,11 +5,13 @@
  */
 package ehospital;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alexy jr
  */
-public class Ambulancia {
+public class Ambulancia implements Serializable{
     String Numero_placa;
     int Año_vehiculo;
     int Velocidad_maxima;

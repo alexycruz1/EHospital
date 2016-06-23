@@ -5,13 +5,14 @@
  */
 package ehospital;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Alexy jr
  */
-public class ComplejoHospitalario {
+public class ComplejoHospitalario implements Serializable{
     String Nombre;
     String Direccion;
     int Capacidad_paramedicos;
