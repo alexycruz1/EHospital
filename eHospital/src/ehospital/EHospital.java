@@ -235,6 +235,8 @@ public class EHospital extends javax.swing.JFrame {
         jtf_distancia_arista = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
 
+        jd_mapa.setTitle("eHospital ©");
+
         javax.swing.GroupLayout jp_mapaLayout = new javax.swing.GroupLayout(jp_mapa);
         jp_mapa.setLayout(jp_mapaLayout);
         jp_mapaLayout.setHorizontalGroup(
@@ -500,13 +502,14 @@ public class EHospital extends javax.swing.JFrame {
 
         jPanel4.add(jcb_emergencia_domicilios, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 323, 178, -1));
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-icon.png"))); // NOI18N
         jButton5.setText("Agregar emergencia");
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton5MouseClicked(evt);
             }
         });
-        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 387, -1, -1));
+        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, -1, -1));
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/black-pattern-wallpaper.jpg"))); // NOI18N
         jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 470));

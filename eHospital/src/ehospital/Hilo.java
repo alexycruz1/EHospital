@@ -34,7 +34,7 @@ public class Hilo extends Thread{
             /*for (int i = 0; i < p2.size(); i++) {
                 p.add(p2.get(i));
             }*/
-            JOptionPane.showMessageDialog(null, "Emergencia terminada en " + Casa,
+            JOptionPane.showMessageDialog(null, "Emergencia terminada en " + Casa + " en " + Tiempo + " horas",
                     "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
             this.setVive(false);
         } catch (Exception e) {

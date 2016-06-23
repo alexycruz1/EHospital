@@ -90,6 +90,6 @@ public class Paramedico implements Comparable <Paramedico> , Serializable{
 
     @Override
     public String toString() {
-        return Nombre;
+        return Nombre + " : " + Complejo_asignado;
     }
 }
