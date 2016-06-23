@@ -14,14 +14,14 @@ import java.io.Serializable;
 public class Paramedico implements Comparable <Paramedico> , Serializable{
     String Nombre;
     int Edad;
-    int ID;
+    String ID;
     String Ranking;
     String Complejo_asignado;
 
     public Paramedico() {
     }
 
-    public Paramedico(String Nombre, int Edad, int ID, String Ranking, String Complejo_asignado) {
+    public Paramedico(String Nombre, int Edad, String ID, String Ranking, String Complejo_asignado) {
         this.Nombre = Nombre;
         this.Edad = Edad;
         this.ID = ID;
@@ -45,11 +45,11 @@ public class Paramedico implements Comparable <Paramedico> , Serializable{
         this.Edad = Edad;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 

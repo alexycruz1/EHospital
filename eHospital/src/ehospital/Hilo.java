@@ -16,25 +16,26 @@ public class Hilo extends Thread{
     double Tiempo;
     String Casa;
     boolean Vive;
-    ArrayList<Paramedico> p;
-     ArrayList<Paramedico> p2;
+    /*ArrayList<Paramedico> p;
+     ArrayList<Paramedico> p2;*/
 
-    public Hilo(double Tiempo, String Casa, boolean Vive, ArrayList<Paramedico> p, ArrayList<Paramedico> p2) {
+    public Hilo(double Tiempo, String Casa, boolean Vive/*, ArrayList<Paramedico> p, ArrayList<Paramedico> p2*/) {
         this.Tiempo = Tiempo;
         this.Casa = Casa;
         this.Vive = Vive;
-        this.p = p;
-        this.p2 = p2;
+        /*this.p = p;
+        this.p2 = p2;*/
     }
     
     @Override
     public void run() {
         try {
             this.verificar(Tiempo);
-            for (int i = 0; i < p2.size(); i++) {
+            /*for (int i = 0; i < p2.size(); i++) {
                 p.add(p2.get(i));
-            }
-            JOptionPane.showMessageDialog(null,"Emergencia terminada en " + Casa);
+            }*/
+            JOptionPane.showMessageDialog(null, "Emergencia terminada en " + Casa,
+                    "OPERACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
             this.setVive(false);
         } catch (Exception e) {
         }
